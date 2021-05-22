@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'users',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
 
 ROOT_URLCONF = 'todo.urls'
 
