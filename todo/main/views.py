@@ -13,10 +13,11 @@ class ProjectModelViewSet(ModelViewSet):
 
     def get_queryset(self):
         name_project = self.request.query_params.get('name')
-        result = Project.objects.filter(name__contains=name_project)
-        if result:
-            return result
-        return Project.objects.all()
+        if name_project:
+            result = Project.objects.filter(name__contains=name_project)
+            if result:
+                return result
+        return self.queryset
 
 
 class ToDoModelViewSet(ModelViewSet):
