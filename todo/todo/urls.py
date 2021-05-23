@@ -20,6 +20,7 @@ from rest_framework.routers import DefaultRouter
 from main.views import ProjectModelViewSet, ToDoModelViewSet
 from users.views import UserModelViewSet
 
+
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
 router.register('projects', ProjectModelViewSet)
