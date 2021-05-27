@@ -51,8 +51,3 @@
   height: 64px;
   background-color: darkgray;
 }
-
-. wrapper {
-  display: flex;
-  flex-direction: column
-}

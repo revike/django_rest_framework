@@ -1,14 +1,15 @@
 import React from "react"
+import {Link} from "react-router-dom";
 
 
 const TodoItem = ({todo}) => {
     return (
         <tr>
             <td>
-                {todo.project}
+                <Link to={`/project/${todo.project}`}>{todo.project}</Link>
             </td>
             <td>
-                {todo.text}
+                <Link to={`/todo/${todo.id}`}>{todo.text}</Link>
             </td>
             <td>
                 {todo.date_creation}
@@ -17,7 +18,7 @@ const TodoItem = ({todo}) => {
                 {todo.date_update}
             </td>
             <td>
-                {todo.user}
+                <Link to={`/user/${todo.user}`}>{todo.user}</Link>
             </td>
         </tr>
     )

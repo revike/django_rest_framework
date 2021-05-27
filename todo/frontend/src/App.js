@@ -7,6 +7,19 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ProjectsList from "./components/Project";
 import TodoList from "./components/ToDo";
+import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+import UserPageList from "./components/UserPage";
+import ProjectPageList from "./components/ProjectPage";
+import ToDoPageList from "./components/ToDoPage";
+
+
+const notFount404 = ({location}) => {
+    return (
+        <div>
+            Error 404: {location.pathname}
+        </div>
+    )
+}
 
 
 class App extends React.Component {
@@ -52,14 +65,32 @@ class App extends React.Component {
 
     render() {
         return (
-            <div class='wrapper'>
-                <Header/>
-                <div class='content'>
-                    <UserList users={this.state.users}/>
-                    <ProjectsList projects={this.state.projects}/>
-                    <TodoList todos={this.state.todos}/>
-                </div>
-                <Footer/>
+            <div class='content'>
+                <BrowserRouter>
+                    <Header/>
+                    <Switch>
+                        <Route exact path='/'
+                               component={() => <UserList
+                                   users={this.state.users}/>}/>
+                        <Route exact path='/projects'
+                               component={() => <ProjectsList
+                                   projects={this.state.projects}/>}/>
+                        <Route exact path='/todos'
+                               component={() => <TodoList
+                                   todos={this.state.todos}/>}/>
+
+                        <Route exact path='/user/:id'> <UserPageList
+                            users={this.state.users}/> </Route>
+                        <Route exact path='/project/:id'> <ProjectPageList
+                            projects={this.state.projects}/> </Route>
+                        <Route exact path='/todo/:id'> <ToDoPageList
+                            todos={this.state.todos}/> </Route>
+
+                        <Redirect from='/users' to='/'/>
+                        <Route component={notFount404}/>
+                    </Switch>
+                    <Footer/>
+                </BrowserRouter>
             </div>
         )
     }
