@@ -24,7 +24,7 @@ class UserModelViewSet(ListModelMixin, RetrieveModelMixin,
     @action(detail=True, methods=['GET'])
     def user_name(self, request, pk=None):
         user = get_object_or_404(ToDoUser, pk=pk)
-        return Response({'name': user.user_name})
+        return Response({'name': user.username})
 
     @action(detail=True, methods=['GET'])
     def user_email(self, request, pk=None):
