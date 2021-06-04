@@ -6,7 +6,7 @@ const UserItem = ({user}) => {
     return (
         <tr>
             <td>{user.id}</td>
-            <td>{user.user_name}</td>
+            <td>{user.username}</td>
             <td>{user.email}</td>
         </tr>
     )
