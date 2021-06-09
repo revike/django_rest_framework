@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from users.models import ToDoUser
-from users.serializers import UserModelSerializer
+from users.serializers import UserModelSerializerV1, UserModelSerializerV2
 
 
 class CustomPermission(BasePermission):
@@ -19,9 +19,13 @@ class CustomPermission(BasePermission):
 class UserModelViewSet(ListModelMixin, RetrieveModelMixin,
                        UpdateModelMixin, GenericViewSet, CreateModelMixin):
     queryset = ToDoUser.objects.all()
-    serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     # permission_classes = [CustomPermission]
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return UserModelSerializerV2
+        return UserModelSerializerV1
 
     @action(detail=True, methods=['GET'])
     def user_name(self, request, pk=None):
