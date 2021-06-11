@@ -23,6 +23,7 @@ class UserModelViewSet(ListModelMixin, RetrieveModelMixin,
     # permission_classes = [CustomPermission]
 
     def get_serializer_class(self):
+        print(self.request.version)
         if self.request.version == 'v2':
             return UserModelSerializerV2
         return UserModelSerializerV1

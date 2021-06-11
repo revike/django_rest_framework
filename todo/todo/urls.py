@@ -22,9 +22,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter
 
 from main.views import ProjectModelViewSet, ToDoModelViewSet
+from users.views import UserModelViewSet
 
 router = DefaultRouter()
-# router.register('users', UserModelViewSet)
+router.register('users', UserModelViewSet)
 router.register('projects', ProjectModelViewSet)
 router.register('todo', ToDoModelViewSet)
 
@@ -40,10 +41,10 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('api/<str:version>/', include(router.urls)),
 
-    path('api/v1/users/', include('users.urls', namespace='v1')),
-    path('api/v2/users/', include('users.urls', namespace='v2')),
+    # path('api/v1/users/', include('users.urls', namespace='v1')),
+    # path('api/v2/users/', include('users.urls', namespace='v2')),
 
     path('api-auth/', include('rest_framework.urls')),  # debug
     path('api-token-auth/', obtain_auth_token),
