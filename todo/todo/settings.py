@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'drf_yasg',
+    'graphene_django',
 
     'users',
     'main',
@@ -144,6 +145,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+GRAPHENE = {
+    'SCHEMA': 'users.schema.schema',
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

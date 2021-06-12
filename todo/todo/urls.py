@@ -15,14 +15,17 @@ Including another URL conf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.decorators.csrf import csrf_exempt
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from graphene_django.views import GraphQLView
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter
 
 from main.views import ProjectModelViewSet, ToDoModelViewSet
 from users.views import UserModelViewSet
+
 
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
@@ -54,4 +57,6 @@ urlpatterns = [
 
     re_path('^swagger(?P<format>\.json)$',
             schema_view.without_ui(cache_timeout=0), name='schema-json'),
+
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=False))),
 ]

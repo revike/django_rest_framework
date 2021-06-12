@@ -16,5 +16,6 @@ class ToDo(models.Model):
     text = models.CharField(max_length=256, verbose_name='текст заметки')
     date_creation = models.DateField(auto_now_add=True, verbose_name='создан')
     date_update = models.DateField(auto_now=True, verbose_name='обновлен')
-    user = models.OneToOneField(ToDoUser, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=True, verbose_name='активен')
+    user = models.ForeignKey(ToDoUser, models.CASCADE)
+    is_active = models.BooleanField(db_index=True, default=True,
+                                    verbose_name='активен')
