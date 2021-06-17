@@ -13,17 +13,17 @@ from users.serializers import UserModelSerializerV1, UserModelSerializerV2
 
 class CustomPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_staff
+        return request.user.is_authenticated
 
 
 class UserModelViewSet(ListModelMixin, RetrieveModelMixin,
                        UpdateModelMixin, GenericViewSet, CreateModelMixin):
     queryset = ToDoUser.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = UserModelSerializerV1
     # permission_classes = [CustomPermission]
 
     def get_serializer_class(self):
-        print(self.request.version)
         if self.request.version == 'v2':
             return UserModelSerializerV2
         return UserModelSerializerV1

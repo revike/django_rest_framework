@@ -16,6 +16,7 @@ Including another URL conf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from graphene_django.views import GraphQLView
@@ -25,7 +26,6 @@ from rest_framework.routers import DefaultRouter
 
 from main.views import ProjectModelViewSet, ToDoModelViewSet
 from users.views import UserModelViewSet
-
 
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
@@ -43,11 +43,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('api/<str:version>/', include(router.urls)),
-
-    # path('api/v1/users/', include('users.urls', namespace='v1')),
-    # path('api/v2/users/', include('users.urls', namespace='v2')),
 
     path('api-auth/', include('rest_framework.urls')),  # debug
     path('api-token-auth/', obtain_auth_token),

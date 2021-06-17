@@ -12,6 +12,7 @@ import UserPageList from "./components/UserPage";
 import ProjectPageList from "./components/ProjectPage";
 import ToDoPageList from "./components/ToDoPage";
 import LoginForm from "./components/Auth";
+import ProjectForm from "./components/ProjectForm";
 
 
 const notFount404 = ({location}) => {
@@ -122,6 +123,34 @@ class App extends React.Component {
             .catch(error => alert(error));
     }
 
+    delete_project(id) {
+        let headers = this.create_header();
+        axios
+            .delete(`http://127.0.0.1:8000/api/v1/projects/${id}/`, {headers})
+            .then(response => {
+                this.setState(
+                    {
+                        'projects': this.state.projects.filter((project) => project.id !== id)
+                    }
+                )
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    create_project(name, users) {
+        axios
+            .post(
+                `http://127.0.0.1:8000/api/v1/projects/`,
+                {'name': name, 'users': users}
+            )
+            .then(response => {
+                this.load_data();
+            })
+            .catch(error => alert(error))
+    }
+
     render() {
         return (
             <div class='content'>
@@ -144,13 +173,19 @@ class App extends React.Component {
                                    users={this.state.users}/>}/>
                         <Route exact path='/projects'
                                component={() => <ProjectsList
-                                   projects={this.state.projects}/>}/>
+                                   projects={this.state.projects}
+                                   deleteProject={(id) => this.delete_project(id)}/>}/>
                         <Route exact path='/todos'
                                component={() => <TodoList
                                    todos={this.state.todos}/>}/>
                         <Route exact path='/login'
                                component={() => <LoginForm
                                    get_token={(username, password) => this.get_token(username, password)}/>}/>
+
+                        <Route exact path='/projects/create'
+                               component={() => <ProjectForm
+                                   create_project={(name, users) => this.create_project(name, users)}
+                                   users={this.state.users}/>}/>
 
                         <Route exact path='/user/:id'> <UserPageList
                             users={this.state.users}/> </Route>

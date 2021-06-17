@@ -6,7 +6,8 @@ from users.models import ToDoUser
 class Project(models.Model):
     """Модель Project"""
     name = models.CharField(max_length=32, verbose_name='название проекта')
-    link = models.CharField(max_length=128, verbose_name='ссылка на репоз-й')
+    link = models.CharField(max_length=128, verbose_name='ссылка на репоз-й',
+                            blank=True)
     users = models.ManyToManyField(ToDoUser, verbose_name='пользователи')
 
 

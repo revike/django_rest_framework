@@ -16,6 +16,9 @@ const Header = () => {
                     <li>
                         <Link to='/projects'> Projects </Link>
                     </li>
+                    <li>
+                        <Link to='/projects/create'>New Project</Link>
+                    </li>
                 </ul>
             </nav>
         </div>

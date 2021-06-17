@@ -31,7 +31,7 @@ class ToDoModelViewSet(ModelViewSet):
         result = ToDo.objects.filter(project=project_id)
         if result:
             return result
-        return ToDo.objects.all()
+        return self.queryset
 
     def perform_destroy(self, instance):
         todo = ToDo.objects.get(id=instance.__dict__['id'])

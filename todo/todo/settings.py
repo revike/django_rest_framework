@@ -84,13 +84,15 @@ REST_FRAMEWORK = {
 ROOT_URLCONF = 'todo.urls'
 
 CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://0.0.0.0:3000',
 ]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,6 +158,9 @@ GRAPHENE = {
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    BASE_DIR / 'frontend/build/static',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
