@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APIRequestFactory, force_authenticate, \
     APIClient, APITestCase
 
-from users.views import UserModelViewSet
+from backend.users.views import UserModelViewSet
 from .models import ToDoUser
 
 

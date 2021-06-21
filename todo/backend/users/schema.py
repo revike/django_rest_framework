@@ -1,8 +1,8 @@
 from graphene import ObjectType, List, Schema, Field, Int, String, Mutation, ID
 from graphene_django import DjangoObjectType
 
-from main.models import ToDo, Project
-from users.models import ToDoUser
+from backend.main.models import ToDo, Project
+from backend.users.models import ToDoUser
 
 
 class UserType(DjangoObjectType):
