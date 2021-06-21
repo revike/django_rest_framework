@@ -43,7 +43,7 @@ const TodoList = ({todos}) => {
             <th>
                 User
             </th>
-            {todos.map((todo) => <TodoItem todo={todo}/>)}
+            {todos.map((todo) => <TodoItem todo={todo} />)}
         </table>
     )
 }
